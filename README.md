@@ -7,10 +7,10 @@ Navigating interview preparation usually means rehearsing in front of a mirror w
 
 ### Key Features:
 
-• 🎙️ Live Interview Simulation – Respond directly to tailored interview questions.
-• 📊 Instant Structured Feedback – Know exactly how relevant, well-structured, and concise your answers are.
-• 💬 On-Demand AI Coach – Dive deeper into your responses and chat with an AI mentor for real-time adjustments.
-• 📈 Final Performance Reports – Walk away with a clear, data-driven report of your interview readiness.
+* 🎙️ Live Interview Simulation – Respond directly to tailored interview questions.
+* 📊 Instant Structured Feedback – Know exactly how relevant, well-structured, and concise your answers are.
+* 💬 On-Demand AI Coach – Dive deeper into your responses and chat with an AI mentor for real-time adjustments.
+* 📈 Final Performance Reports – Walk away with a clear, data-driven report of your interview readiness.
 
 ## 🧠 How it works
 
