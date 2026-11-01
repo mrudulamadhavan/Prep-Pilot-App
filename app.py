@@ -143,8 +143,8 @@ with st.sidebar:
             os.environ["GROQ_API_KEY"] = entered.strip()
             st.rerun()
         st.caption("Get a free key at https://console.groq.com")
-    # else:
-        # st.success("API key loaded", icon="🔑")
+    else:
+        st.success("API key loaded", icon="🔑")
 
     st.divider()
     st.subheader("🔊 Voice")
