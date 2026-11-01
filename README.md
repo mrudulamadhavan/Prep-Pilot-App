@@ -78,3 +78,9 @@ preppilot/
 
 ---
 
+## Streamlit App Link
+
+> https://aipreppilot.streamlit.app/
+
+* <img width="708" height="418" alt="{3D9D7351-E290-4FE2-93E0-D3A91BD78256}" src="https://github.com/user-attachments/assets/8d9631b3-c42c-46a5-9417-37e6f9da56e4" />
+
