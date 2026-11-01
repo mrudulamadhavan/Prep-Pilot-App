@@ -217,7 +217,7 @@ with tab_practice:
                 rate=voice_rate,
                 autoplay=True,
                 key="welcome",
-                label="🔊 Hear welcome message",
+                label="🔊 Click to know more..",
             )
 
         if st.button("🚀 Start interview", type="primary"):
