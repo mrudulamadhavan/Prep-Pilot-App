@@ -1,76 +1,80 @@
-# PrepPilot
 
-An AI-powered interview practice app built with Streamlit. Answer interview
-questions, get instant structured feedback, chat with an AI coach, and receive a
-final performance report.
+## 🎯 Prep Pilot — AI-Powered Interview Coach 🚀
 
-## Features
+Navigating interview preparation usually means rehearsing in front of a mirror with zero feedback, paying hefty fees for live mock interviews, or settling for generic chatbots that spit out vague, unmeasurable advice. Candidates are left guessing if their answers are actually structured, relevant, or professional.
 
-- AI evaluation of every answer with encouraging, actionable feedback
-- STAR structure detection (Situation, Task, Action, Result)
-- Filler word detection
-- Keyword-based relevance scoring
-- Welcome screen with a spoken greeting and a Start button
-- Questions are read aloud (browser text-to-speech); you type your answers. Toggle and speed in the sidebar
-- Live scorecard in the sidebar
-- Ask-the-coach chat that uses your whole session history
-- Final report with AI coaching summary and Markdown download
+**Prep Pilot App** changes the game. Built on Streamlit, this intelligent application serves as your personal interview simulator and coach.
 
-## Quick start
+### Key Features:
 
-```bash
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env             # then open .env and paste your key after GROQ_API_KEY=
-streamlit run app.py
+• 🎙️ Live Interview Simulation – Respond directly to tailored interview questions.
+• 📊 Instant Structured Feedback – Know exactly how relevant, well-structured, and concise your answers are.
+• 💬 On-Demand AI Coach – Dive deeper into your responses and chat with an AI mentor for real-time adjustments.
+• 📈 Final Performance Reports – Walk away with a clear, data-driven report of your interview readiness.
+
+## 🧠 How it works
+
+PrepPilot uses an LLM **with tool calling**. The model doesn't just write feedback; it decides which analysis tools to run on your answer, reads their results, and then writes feedback grounded in that data.
+
+```mermaid
+flowchart LR
+    A[You type an answer] --> B[Evaluator agent<br/>Groq LLM]
+    B -->|calls| C[detect_filler_words]
+    B -->|calls| D[check_star_structure]
+    B -->|calls| E[score_relevance]
+    C --> B
+    D --> B
+    E --> B
+    B --> F[Feedback + tool results]
+    F --> G[Session history]
+    G --> H[Live scorecard]
+    G --> I[Coach chat]
+    G --> J[Final report + AI coaching]
 ```
 
-Get a free API key at https://console.groq.com. Your `.env` should look like this
-(no spaces or quotes needed):
-
-```text
-GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxx
-```
-
-No `.env`? You can also paste the key into the sidebar when the app starts, or
-add it to `.streamlit/secrets.toml` as `GROQ_API_KEY = "gsk_..."`.
-
-## Project structure
+---
+## 📁 Project structure
 
 ```text
 preppilot/
-├── app.py                  # Streamlit UI
-├── config.py               # App name, tagline, model
-├── voice.py                # Read-aloud (text-to-speech) for questions
-├── interview_bank.py       # Questions and expected keywords
+├── app.py                   # Streamlit UI (entry point)
+├── config.py                # App name, tagline, icon, model
+├── voice.py                 # Read-aloud (text-to-speech) for questions
+├── interview_bank.py        # 50 questions: level, STAR flag, expected keywords
 ├── requirements.txt
-├── .env.example
-├── .streamlit/config.toml
+├── .env.example             # Template for your API key
+├── .streamlit/
+│   └── config.toml          # Theme settings
 ├── core/
-│   ├── llm.py              # Lazy Groq client
-│   ├── evaluator_agent.py  # Tool-calling answer evaluator
-│   ├── agent.py            # Ask-the-coach agent
-│   ├── final_coach.py      # Final coaching report
-│   ├── report.py           # Session metrics aggregation
-│   └── session_manager.py  # In-memory session history
+│   ├── llm.py               # Groq client + API key loading
+│   ├── evaluator_agent.py   # Tool-calling answer evaluator
+│   ├── agent.py             # "Ask the Coach" agent
+│   ├── final_coach.py       # Final AI coaching report
+│   ├── report.py            # Session metrics aggregation
+│   └── session_manager.py   # In-memory session history
 └── tools/
-    ├── filler_words.py
-    ├── relevance.py
-    └── star_structure.py
+    ├── filler_words.py      # Filler word detection
+    ├── relevance.py         # Keyword relevance score
+    └── star_structure.py    # STAR component detection
 ```
+### Using the app
+1. Click **Start interview**.
+2. Listen to the question (it plays automatically, or press 🔊), then type your answer.
+3. On behavioural questions, choose **STAR guided** or **Free text**.
+4. Click **Evaluate Answer** to see feedback, filler words, STAR coverage and relevance.
+5. Use **Next →** to continue, **Ask Coach** for advice, and **Final Report** when you're done.
 
-## Voice
+---
+## 🛠 Tech stack
 
-Questions are read aloud using your browser's built-in speech engine, so there is
-nothing to install. Use the **Voice** section in the sidebar to switch it off or change
-the speaking speed. If a question doesn't play automatically (some browsers block
-audio until you click on the page), press **🔊 Listen to question**. Works best in
-Chrome, Edge and Safari.
+| Area | Technology |
+|---|---|
+| UI | [Streamlit](https://streamlit.io) |
+| LLM | `openai/gpt-oss-20b` on [Groq](https://groq.com), accessed with the OpenAI Python SDK |
+| AI pattern | Function / tool calling |
+| Voice | Browser Web Speech API (`speechSynthesis`) |
+| Config | `python-dotenv` |
+| Language | Python 3.9+ |
 
+---
 
-## Customising
-
-- **Rename the app:** edit `APP_NAME` in `config.py`.
-- **Change questions:** edit `interview_bank.py`.
-- **Change model:** edit `MODEL_NAME` in `config.py`.
